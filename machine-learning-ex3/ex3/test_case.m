@@ -1,14 +1,14 @@
-
-%input
-theta = [-2; -1; 1; 2];
-X = [ones(3,1) magic(3)];
-y = [1; 0; 1] >= 0.5;       % creates a logical array
-lambda = 3;
-[J grad] = lrCostFunction(theta, X, y, lambda);
-% output:
-%J = 7.6832
-%grad =
-%   0.31722
-%   -0.12768
-%   2.64812
-%   4.23787
+Theta1 = reshape(sin(0 : 0.5 : 5.9), 4, 3);
+Theta2 = reshape(sin(0 : 0.3 : 5.9), 4, 5);
+X = reshape(sin(1:16), 8, 2);
+p = predict(Theta1, Theta2, X)
+% you should see this result
+% p = 
+%   4
+%   1
+%   1
+%   4
+%   4
+%   4
+%   4
+%   2

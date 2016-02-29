@@ -49,15 +49,10 @@ z3 = a2*Theta2';
 
 [Y, a3] = max(sigmoid(z3),[],2);
 
-%Construct a binary vector container
-y_vector = (repmat(1:10,m,1));
-
-%Loop through 5000 inputs to make them binary
+y_vector = (repmat([1:10],m,1);
+ 
 for i = 1:m
-    y_vector(i,:) = (y_vector(i,:) == y(i));
-end
-
-
+    y_vector(i,:) == 
 
 J = (1/m)sum(sum(-y*log())   
 
