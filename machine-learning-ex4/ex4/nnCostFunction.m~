@@ -47,14 +47,16 @@ a2 = [ones(size(z2,1),1) sigmoid(z2)];
 
 z3 = a2*Theta2';
 
-[Y, a3] = max(sigmoid(z3),[],2);
+a3 = sigmoid(z3);
 
-y_vector = (repmat([1:10],m,1);
- 
-for i = 1:m
-    y_vector(i,:) == 
 
-J = (1/m)sum(sum(-y*log())   
+% Transform outputs into binary vectors
+y_vector = makeBinary(y, 10);
+
+hypo = a3';
+
+% Calculate Cost function 
+J = (1/m)*sum(sum((-y_vector).*log(hypo) - (1-y_vector).*log(1-hypo)));
 
 
 
@@ -73,6 +75,13 @@ J = (1/m)sum(sum(-y*log())
 %         Hint: We recommend implementing backpropagation using a for-loop
 %               over the training examples if you are implementing it for the 
 %               first time.
+
+
+
+
+
+
+
 %
 % Part 3: Implement regularization with the cost function and gradients.
 %
