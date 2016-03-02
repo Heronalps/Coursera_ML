@@ -56,8 +56,10 @@ y_vector = makeBinary(y, num_labels);
 hypo = a3';
 
 % Calculate Cost function 
-% (1/m)*sum(-y.*log(hypo) - (1-y).*log(1-hypo))
-J = (1/m)*sum(sum((-y_vector).*log(hypo) - (1-y_vector).*log(1-hypo)));
+% Theta1(:,2:end) It should not include bias unit parameters in
+% regularization
+J = (1/m)*sum(sum((-y_vector).*log(hypo) - (1-y_vector).*log(1-hypo))) + ...
+    (lambda/(2*m))*(sum(sum(Theta1(:,2:end).^2)) + sum(sum(Theta2(:,2:end).^2)));
 
 
 
