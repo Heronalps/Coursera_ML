@@ -16,9 +16,12 @@ W = zeros(L_out, 1 + L_in);
 % Instructions: Initialize W randomly so that we break the symmetry while
 %               training the neural network.
 %
-% Note: The first row of W corresponds to the parameters for the bias units
+% Note: The first column of W corresponds to the parameters for the bias units
 %
 
+% Randomly initialize the weights to small values
+epsilon_init = 0.12;
+W = rand(L_out, L_in+1) * 2 * epsilon_init - epsilon_init;
 
 
 
