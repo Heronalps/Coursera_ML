@@ -80,10 +80,35 @@ J = (1/m)*sum(sum((-y_vector).*log(hypo) - (1-y_vector).*log(1-hypo))) + ...
 %               over the training examples if you are implementing it for the 
 %               first time.
 
+for t = 1:m
+    
+    % feedforward pass for 1 sample
+    z2 = a1(t,:) * Theta1';
+    
+    
+    
+    delta_3 = hypo - y_vector;
 
 
+    %(26*10)*(10*5000).*(5000*26)'
+    delta_2 = ((Theta2)' * delta_3) .* (a2 .* (1-a2))';
+
+    % Remove first column of delta, which is for bias units
+    delta_2 = delta_2(2:end, :);
+
+    % Accumulate gradient in Delta
+    Delta = delta_3 * a2;
 
 
+    % Repeat the steps for lay 1
+    delta_1 = ((Theta1)' * delta_2) .* (a1 .* (1-a1))';
+
+    delta_1 = delta_1(2:end, :);
+
+    Delta = Delta + delta_2 * a1
+
+
+end
 
 
 %
