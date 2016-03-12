@@ -107,7 +107,11 @@ for t = 1:m
 
     Delta = Delta + delta_2 * a1
 
+<<<<<<< HEAD
     
+=======
+   
+>>>>>>> c68deb87edbf582e37579a7ce335d6ac133c6bde
 
 end
 
