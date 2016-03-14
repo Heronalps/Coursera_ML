@@ -106,8 +106,8 @@ for t = 1:m
     delta_1 = delta_1(2:end, :);
 
     Delta = Delta + delta_2 * a1
-%%%%
-   
+
+    
 
 end
 
