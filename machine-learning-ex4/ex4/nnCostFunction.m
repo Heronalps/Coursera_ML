@@ -93,30 +93,38 @@ for t = 1:m
     a3 = sigmoid(z3);
     
     
-    % Start Backpropagation
+    % Step2: Start Backpropagation
     delta_3 = a3 - y_vector(:,t)';
 
+    % Step3: Layer 2 Backpropagation
+    %(1x10)*(10x26).*(1x26)
 
-    %(1x10)*(10x25).*(1x25)
-    %Remove delta_2(0)
-    delta_2 = (delta_3 * Theta2(:,(1:(size(Theta2,2)-1)))) .* sigmoidGradient(z2);
+    delta_2 = (delta_3 * Theta2 .* sigmoidGradient(a2));
 
-    % Remove first column of delta, which is for bias units
-    delta_2 = delta_2(2:end, :);
+    
+    % Step4: Remove first element of delta_2, which is for bias units
+    delta_2 = delta_2(:,2:end);
 
+    %Create a temp container for Delta in layer 2
+    Delta_2 = zeros(size(Theta2));
+    
     % Accumulate gradient in Delta
-    Delta = delta_3 * a2;
+    Delta_2 = Delta_2 + delta_3' * a2;
 
-
+    
     % Repeat the steps for lay 1
-    delta_1 = ((Theta1)' * delta_2) .* (a1 .* (1-a1))';
+    delta_1 = (delta_2 * Theta1 .* sigmoidGradient(a1(t,:)));
 
-    delta_1 = delta_1(2:end, :);
+    delta_1 = delta_1(:,2:end);
 
-    Delta = Delta + delta_2 * a1
-
+    Delta_1 = zeros(size(Theta1));
+    
+    Delta_1 = Delta_1 + delta_1' * a1(t,:);
 
 end
+
+Theta1_grad = (1/m)*Delta_1;
+Theta2_grad = (1/m)*Delta_2;
 
 
 %
