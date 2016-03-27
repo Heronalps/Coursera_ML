@@ -1,4 +1,4 @@
-function [J grad] = nnCostFunction(nn_params, ...
+function [J, grad] = nnCostFunction(nn_params, ...
                                    input_layer_size, ...
                                    hidden_layer_size, ...
                                    num_labels, ...
@@ -80,51 +80,60 @@ J = (1/m)*sum(sum((-y_vector).*log(hypo) - (1-y_vector).*log(1-hypo))) + ...
 %               over the training examples if you are implementing it for the 
 %               first time.
 
-for t = 1:m
-    
-    % feedforward pass for 1 sample. 
-    % a1(t, :) => 1x401 ; Theta1' => 401x25; z2 => 1x25
-    z2 = a1(t,:) * Theta1';
-    
-    a2 = [ones(size(z2,1)) sigmoid(z2)];
-    
-    z3 = a2*Theta2';
-    
-    a3 = sigmoid(z3);
-    
-    
-    % Step2: Start Backpropagation
-    delta_3 = a3 - y_vector(:,t)';
+% for t = 1:m
+%     
+%     % feedforward pass for 1 sample. 
+%     % a1(t, :) => 1x401 ; Theta1' => 401x25; z2 => 1x25
+%     z2 = a1(t,:) * Theta1';
+%     
+%     a2 = [ones(size(z2,1)) sigmoid(z2)];
+%     
+%     z3 = a2*Theta2';
+%     
+%     a3 = sigmoid(z3);
+%     
+%     
+%     % Step2: Start Backpropagation
+%     delta_3 = a3 - y_vector(:,t)';
+% 
+%     % Step3: Layer 2 Backpropagation
+%     %(1x10)*(10x26).*(1x26)
+% 
+%     delta_2 = (delta_3 * Theta2 .* sigmoidGradient(a2));
+% 
+%     
+%     % Step4: Remove first element of delta_2, which is for bias units
+%     delta_2 = delta_2(:,2:end);
+% 
+%     %Create a temp container for Delta in layer 2
+%     Delta_2 = zeros(size(Theta2));
+%     
+%     % Accumulate gradient in Delta
+%     Delta_2 = Delta_2 + delta_3' * a2;
+% 
+%     
+%     % Repeat the steps for lay 1
+%     delta_1 = (delta_2 * Theta1 .* sigmoidGradient(a1(t,:)));
+% 
+%     delta_1 = delta_1(:,2:end);
+% 
+%     Delta_1 = zeros(size(Theta1));
+%     
+%     Delta_1 = Delta_1 + delta_2' * a1(t,:);
+% 
+% end
 
-    % Step3: Layer 2 Backpropagation
-    %(1x10)*(10x26).*(1x26)
 
-    delta_2 = (delta_3 * Theta2 .* sigmoidGradient(a2));
+eye_matrix = eye(num_labels);
+y_matrix = eye_matrix(y,:);
 
-    
-    % Step4: Remove first element of delta_2, which is for bias units
-    delta_2 = delta_2(:,2:end);
+delta_3 = a3 - y_matrix;
 
-    %Create a temp container for Delta in layer 2
-    Delta_2 = zeros(size(Theta2));
-    
-    % Accumulate gradient in Delta
-    Delta_2 = Delta_2 + delta_3' * a2;
+delta_2 = (delta_3 * Theta2(:,2:end) .* sigmoidGradient(z2));
 
-    
-    % Repeat the steps for lay 1
-    delta_1 = (delta_2 * Theta1 .* sigmoidGradient(a1(t,:)));
+Delta_1 = delta_2' * a1;
 
-    delta_1 = delta_1(:,2:end);
-
-    Delta_1 = zeros(size(Theta1));
-    
-    Delta_1 = Delta_1 + delta_1' * a1(t,:);
-
-end
-
-Theta1_grad = (1/m)*Delta_1;
-Theta2_grad = (1/m)*Delta_2;
+Delta_2 = delta_3' * a2;
 
 
 %
@@ -139,15 +148,8 @@ Theta2_grad = (1/m)*Delta_2;
 
 
 
-
-
-
-
-
-
-
-
-
+Theta1_grad = (1/m) * Delta_1 + (lambda/m) * [zeros(size(Theta1,1),1), Theta1(:,2:end)];
+Theta2_grad = (1/m) * Delta_2 + (lambda/m) * [zeros(size(Theta2,1),1), Theta2(:,2:end)];
 
 
 
