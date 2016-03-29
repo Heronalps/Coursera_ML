@@ -226,19 +226,5 @@ lambda = 3;
 
 error_test = linearRegCostFunction(X_poly_test, ytest,theta,0);
 
-%% ========== Part 10: Plotting learning curve with randomly selected examples ======
-
-lambda = 0.01;
-
-% Generate ramdom numbers
-
-
-
-
-
-
-
-
-
-
+%% ========== Part 10: Plotting 
 
