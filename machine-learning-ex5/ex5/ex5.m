@@ -230,14 +230,22 @@ error_test = linearRegCostFunction(X_poly_test, ytest,theta,0);
 
 lambda = 0.01;
 
-% Generate ramdom numbers
+MaxIter = 50;
 
+[error_train, error_val] = ...
+    learningCurveRandom([ones(m, 1) X], y, ...
+                  [ones(size(Xval, 1), 1) Xval], yval, ...
+                  lambda, MaxIter);
 
+% Plot figure
 
+plot(1:m, error_train, 1:m, error_val);
 
-
-
-
+title(sprintf('Polynomial Regression Learning Curve (lambda = %f)', lambda));
+xlabel('Number of training examples')
+ylabel('Error')
+axis([0 13 0 100])
+legend('Train', 'Cross Validation')
 
 
 

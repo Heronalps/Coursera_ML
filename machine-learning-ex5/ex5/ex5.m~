@@ -226,5 +226,47 @@ lambda = 3;
 
 error_test = linearRegCostFunction(X_poly_test, ytest,theta,0);
 
-%% ========== Part 10: Plotting 
+%% ========== Part 10: Plotting learning curve with randomly selected examples ======
+
+lambda = 0.01;
+
+MaxIter = 50;
+
+error_test = zeros(MaxIter,1);
+
+for i = 1:MaxIter
+    
+    % Generate ramdom numbers
+
+    pick = randperm(m,(1/2)*m);
+    X_poly_rand = X_poly(pick,:);
+    y_rand = y(pick,:);
+    
+    
+    pick_test = randperm(size(X_poly_test,1),round((1/2)*size(X_poly_test,1)));
+    
+    X_poly_test_rand = X_poly_test(pick_test,:);
+    ytest_rand = ytest(pick_test,:);
+    
+    %X_poly_val_rand = X_poly_val(pick_test,:);
+    %yval_rand = yval(pick_test,:);
+    
+    % Train by ramdomly select sample set and record CV error
+    
+    [theta] = trainLinearReg(X_poly_rand, y_rand, lambda);
+    
+    error_test(i) = linearRegCostFunction(X_poly_test_rand, ytest_rand, theta, 0);
+    
+    [error_train, error_val] = ...
+    learningCurve([ones(m, 1) X], y, ...
+                  [ones(size(Xval, 1), 1) Xval], yval, ...
+                  lambda);
+
+end
+
+
+
+
+
+
 
