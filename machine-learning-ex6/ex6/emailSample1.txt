@@ -1,10 +1,32 @@
-> Anyone knows how much it costs to host a web portal ?
->
-Well, it depends on how many visitors you're expecting.
-This can be anywhere from less than 10 bucks a month to a couple of $100. 
-You should checkout http://www.rackspace.com/ or perhaps Amazon EC2 
-if youre running something big..
+Dear Mr. Lebo Zhang:
 
-To unsubscribe yourself from this mailing list, send an email to:
-groupname-unsubscribe@egroups.com
+A faculty committee at UCLA has made a decision on your application for
+Computer Science for Fall 2016.
 
+If you have not already done so, please use the following link using the
+credentials you selected when you created your application to view the
+decision:
+
+https://appstatus.grad.ucla.edu/
+
+If you have any questions about the decision, please contact your
+department directly at:
+
+Computer Science
+4403 Boelter Hall
+Box 951596
+Los Angeles, CA 90095-1596
+(310)825-6830
+
+gradadm@cs.ucla.edu
+
+
+
+Sincerely,
+
+UCLA Graduate Division
+Diversity, Inclusion and Admissions
+
+
+Please note: This e-mail message was sent from a notification-only address
+that cannot accept incoming e-mail. Please do not reply to this message.

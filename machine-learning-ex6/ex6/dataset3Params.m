@@ -22,11 +22,36 @@ sigma = 0.3;
 %  Note: You can compute the prediction error using 
 %        mean(double(predictions ~= yval))
 %
+C_array = [0.01;0.03;0.1;0.3;1;3;10;30];
+sigma_array = C_array;
+cost = 100000;
 
+for index_C = 1:numel(C_array)
+    
+    C_temp = C_array(index_C);
+    
+    for index_sig = 1:numel(sigma_array)
+        
+        sigma_temp = sigma_array(index_sig);
+        
+        model= svmTrain(X, y, C_temp, @(x1, x2) gaussianKernel(x1, x2, sigma_temp));
+        
+        predictions = svmPredict(model, Xval);
+        
+        if cost > mean(double(predictions ~= yval))
+            
+            cost = mean(double(predictions ~= yval));
+            index_C_Opt = index_C;
+            index_sigma_Opt = index_sig;
+            
+        end
 
+    end
+    
+end
 
-
-
+C = C_array(index_C_Opt);
+sigma = sigma_array(index_sigma_Opt);
 
 
 % =========================================================================

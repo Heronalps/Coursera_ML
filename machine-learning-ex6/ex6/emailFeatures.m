@@ -13,7 +13,7 @@ x = zeros(n, 1);
 % ====================== YOUR CODE HERE ======================
 % Instructions: Fill in this function to return a feature vector for the
 %               given email (word_indices). To help make it easier to 
-%               process the emails, we have have already pre-processed each
+%               process the emails, we have already pre-processed each
 %               email and converted each word in the email into an index in
 %               a fixed dictionary (of 1899 words). The variable
 %               word_indices contains the list of indices of the words
@@ -47,12 +47,10 @@ x = zeros(n, 1);
 %              x = [ 0 0 0 0 1 0 0 0 ... 0 0 0 0 1 ... 0 0 0 1 0 ..];
 %
 %
-
-
-
-
-
-
+    for i = 1:numel(word_indices)
+        x(word_indices(i))= 1;
+    end
+    
 
 
 % =========================================================================
