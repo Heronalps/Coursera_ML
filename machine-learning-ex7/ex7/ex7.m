@@ -107,7 +107,7 @@ pause;
 fprintf('\nRunning K-Means clustering on pixels from an image.\n\n');
 
 %  Load an image of a bird
-A = double(imread('bird_small.png'));
+A = double(imread('IMG_3026.JPG'));
 
 % If imread does not work for you, you can try instead
 %   load ('bird_small.mat');
@@ -127,7 +127,7 @@ X = reshape(A, img_size(1) * img_size(2), 3);
 K = 16; 
 max_iters = 10;
 
-% When using K-Means, it is important the initialize the centroids
+% When using K-Means, it is important to initialize the centroids
 % randomly. 
 % You should complete the code in kMeansInitCentroids.m before proceeding
 initial_centroids = kMeansInitCentroids(X, K);
