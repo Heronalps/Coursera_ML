@@ -21,7 +21,7 @@ sigma2 = zeros(n, 1);
 %               should contain variance of the i-th feature.
 %
 
-
+%%
 
 
 
