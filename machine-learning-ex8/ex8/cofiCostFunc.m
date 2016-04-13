@@ -40,14 +40,20 @@ Theta_grad = zeros(size(Theta));
 %                     partial derivatives w.r.t. to each element of Theta
 %
 
-%%
+Rating_matrix = (X*Theta' - Y).^2;
+
+J = (1/2)*sum(sum(Rating_matrix .* R));
+
+for i = 1:num_movies
+
+    X_grad(i) = sum(sum((X*Theta' - Y)*Theta(i) .* R));
+end
 
 
+for i = 1:num_users
 
-
-
-
-
+    Theta_grad(i) = sum(sum((X*Theta' - Y)*X(i) .* R));
+end
 
 
 
