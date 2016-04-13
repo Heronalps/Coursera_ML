@@ -42,22 +42,16 @@ Theta_grad = zeros(size(Theta));
 
 Rating_matrix = (X*Theta' - Y).^2;
 
-J = (1/2)*sum(sum(Rating_matrix .* R));
-
-for i = 1:num_movies
-
-    X_grad(i) = sum(sum((X*Theta' - Y)*Theta(i) .* R));
-end
+J = (1/2)*sum(sum(Rating_matrix.*R)) + (lambda/2)*sum(sum(Theta.^2)) + (lambda/2)*sum(sum(X.^2));
 
 
-for i = 1:num_users
+    % (X*Theta' - Y) .* R  = rating matrix (num_movie x num_user)
+    
+    % user dimension of rating matrix multiplied by Theta
+    X_grad = (X*Theta' - Y) .* R * Theta + lambda*X;
 
-    Theta_grad(i) = sum(sum((X*Theta' - Y)*X(i) .* R));
-end
-
-
-
-
+    % movie dimension of rating matrix multiplied 
+    Theta_grad = ((X*Theta' - Y).* R)' * X + lambda*Theta;
 
 
 
